@@ -9,4 +9,12 @@ class AppColors {
   static const lightblue = Color(0xFF4B68D1);
   static const blackshade = Color(0xFF555555);
   static const hintText = Color(0xFFC7C7CD);
+
+  static const lightGreen = Color(0xFFCEEDC7);
+  static const lightRed = Color(0xFFFF9494);
+  static const lightOrange = Color(0xFFFFD4B2);
+  static const lightYellow = Color(0xFFFFF6BD);
+  static const lightBlue = Color(0xFFD7E3FC);
+  static const lightPink = Color(0xFFFFC8DD);
+  static const lightPurple = Color(0xFF9C89B8);
 }
