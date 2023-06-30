@@ -26,6 +26,31 @@ class HomeScreen extends GetView<TodoController> {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
+        title: Container(
+          width: 250,
+          height: 40,
+          decoration: BoxDecoration(
+            color: AppColors.blue,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Category',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.expand_more),
+              ),
+            ],
+          ),
+        ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
@@ -43,10 +68,9 @@ class HomeScreen extends GetView<TodoController> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _Task(),
+          _task(),
           _create(),
           _todoList(),
-          // const SizedBox(),
           _signOut(),
         ],
       ),
@@ -65,33 +89,61 @@ class HomeScreen extends GetView<TodoController> {
               child: Row(
                 children: [
                   (todoModel.isDone!)
-                      ? GestureDetector(
-                          onTap: () => controller.deleteTodo(todoModel.id!),
-                          child: const Icon(
-                            Icons.check_circle,
-                            color: AppColors.lightblue,
-                            size: 40,
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () => controller.deleteTodo(todoModel.id!),
+                            child: const Icon(
+                              Icons.check_circle,
+                              color: AppColors.lightblue,
+                              size: 40,
+                            ),
                           ),
                         )
-                      : GestureDetector(
-                          onTap: () {
-                            controller.updateTodo(todoModel.id!);
-                          },
-                          child: const Icon(
-                            Icons.circle_outlined,
-                            color: AppColors.lightblue,
-                            size: 40,
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              controller.updateTodo(todoModel.id!);
+                            },
+                            child: const Icon(
+                              Icons.circle_outlined,
+                              color: AppColors.lightblue,
+                              size: 40,
+                            ),
                           ),
                         ),
+                  const SizedBox(
+                    width: 20,
+                  ),
                   Flexible(
                     child: Container(
+                      width: 300,
+                      height: 45,
                       decoration: BoxDecoration(
                           color: AppColors.lightBlue,
                           borderRadius: BorderRadius.circular(8.0)),
-                      child: Column(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(todoModel.todo),
-                          Text(todoModel.time.toString()),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              todoModel.todo,
+                              style: const TextStyle(
+                                fontSize: 17,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              todoModel.formattedTime,
+                              style: const TextStyle(
+                                fontSize: 17,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -138,22 +190,28 @@ class HomeScreen extends GetView<TodoController> {
     );
   }
 
-  Widget _Task() {
+  Widget _task() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: const [
-        Text(
-          'Task',
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
+        Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text(
+            'Task',
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        Text(
-          'today',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+        Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text(
+            'today',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
