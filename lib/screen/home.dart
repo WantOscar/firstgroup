@@ -73,7 +73,7 @@ class HomeScreen extends GetView<TodoController> {
                             onTap: () => controller.deleteTodo(todoModel.id!),
                             child: const Icon(
                               Icons.check_circle,
-                              color: AppColors.lightblue,
+                              color: AppColors.lightBlue,
                               size: 40,
                             ),
                           ),
@@ -86,7 +86,7 @@ class HomeScreen extends GetView<TodoController> {
                             },
                             child: const Icon(
                               Icons.circle_outlined,
-                              color: AppColors.lightblue,
+                              color: AppColors.lightBlue,
                               size: 40,
                             ),
                           ),
