@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:login_ui/controller/todo_controller.dart';
 import 'package:login_ui/screen/add_todo_page.dart';
 import 'package:login_ui/style/app_color.dart';
+import 'package:login_ui/widgets/home_task_text.dart';
 
 class HomeScreen extends GetView<TodoController> {
   HomeScreen({super.key});
@@ -26,30 +27,7 @@ class HomeScreen extends GetView<TodoController> {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Container(
-          width: 250,
-          height: 40,
-          decoration: BoxDecoration(
-            color: AppColors.blue,
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Category',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.expand_more),
-              ),
-            ],
-          ),
-        ),
+        title: _title(),
         centerTitle: true,
         actions: [
           IconButton(
@@ -68,7 +46,7 @@ class HomeScreen extends GetView<TodoController> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _task(),
+          const HomeTaskText(),
           _create(),
           _todoList(),
           _signOut(),
@@ -190,31 +168,30 @@ class HomeScreen extends GetView<TodoController> {
     );
   }
 
-  Widget _task() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
-        Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-            'Task',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
+  Widget _title() {
+    return Container(
+      width: 250,
+      height: 40,
+      decoration: BoxDecoration(
+        color: AppColors.blue,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Category',
+              style: TextStyle(color: Colors.black),
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-            'today',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.expand_more),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

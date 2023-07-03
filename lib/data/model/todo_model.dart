@@ -18,7 +18,12 @@ class TodoModel {
     return '';
   }
 
-  TodoModel({this.id, required this.todo, this.time, this.isDone});
+  TodoModel({
+    this.id,
+    required this.todo,
+    this.time,
+    this.isDone,
+  });
 
   factory TodoModel.fromJson(DocumentSnapshot doc) {
     return TodoModel(
