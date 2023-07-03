@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:login_ui/controller/todo_controller.dart';
 import 'package:login_ui/screen/home.dart';
 import 'package:login_ui/style/add_todo_page_container.dart';
 import 'package:login_ui/style/add_todo_page_text.dart';
 import 'package:login_ui/style/app_color.dart';
 
-class AddTodoPage extends StatefulWidget {
-  const AddTodoPage({Key? key}) : super(key: key);
+class AddTodoPage extends GetView<TodoController> {
+  AddTodoPage({Key? key}) : super(key: key);
 
-  @override
-  State<AddTodoPage> createState() => _AddTodoPage();
-}
-
-class _AddTodoPage extends State<AddTodoPage> {
-  DateTime selectedDate = DateTime.now();
+  // DateTime selectedDate = DateTime.now();
+  final ValueNotifier<DateTime> selectedDate =
+      ValueNotifier<DateTime>(DateTime.now());
 
   final categoryValue = ['Work', 'Study', 'Exercise'];
   String? selectedCategory;
@@ -30,23 +29,20 @@ class _AddTodoPage extends State<AddTodoPage> {
     );
   }
 
-  String getFormattedDate() {
-    return '${selectedDate.year}/${selectedDate.month}/${selectedDate.day}';
+  String getFormattedDate(DateTime dateTime) {
+    return '${dateTime.year}/${dateTime.month}/${dateTime.day}';
   }
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
+      initialDate: selectedDate.value,
       firstDate: DateTime(2015, 8),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != selectedDate) {
-      setState(
-        () {
-          selectedDate = picked;
-        },
-      );
+
+    if (picked != null && picked != selectedDate.value) {
+      selectedDate.value = picked;
     }
   }
 
@@ -69,7 +65,7 @@ class _AddTodoPage extends State<AddTodoPage> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 50),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +73,7 @@ class _AddTodoPage extends State<AddTodoPage> {
             children: [
               _name(),
               const SizedBox(height: 20),
-              _date(),
+              _date(context),
               const SizedBox(height: 20),
               _category(),
               const SizedBox(height: 20),
@@ -85,7 +81,7 @@ class _AddTodoPage extends State<AddTodoPage> {
               const SizedBox(height: 20),
               _pickColor(),
               const SizedBox(height: 20),
-              _addBtn(),
+              _addBtn(context),
             ],
           ),
         ),
@@ -96,22 +92,24 @@ class _AddTodoPage extends State<AddTodoPage> {
   Widget _name() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        AddTodoPageText(
+      children: [
+        const AddTodoPageText(
           text: 'Name',
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         AddTodoPageContainer(
           child: SizedBox(
             width: 300,
-            child: TextField(),
+            child: TextField(
+              controller: controller.createCon,
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _date() {
+  Widget _date(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -122,7 +120,7 @@ class _AddTodoPage extends State<AddTodoPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                getFormattedDate(),
+                getFormattedDate(DateTime.now()),
                 style: const TextStyle(fontSize: 16),
               ),
               IconButton(
@@ -155,11 +153,11 @@ class _AddTodoPage extends State<AddTodoPage> {
                 .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                 .toList(),
             onChanged: (value) {
-              setState(
-                () {
-                  selectedCategory = value!;
-                },
-              );
+              // setState(
+              //   () {
+              //     selectedCategory = value!;
+              //   },
+              // );
             },
             icon: const Icon(
               Icons.expand_more,
@@ -185,11 +183,11 @@ class _AddTodoPage extends State<AddTodoPage> {
                 .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                 .toList(),
             onChanged: (value) {
-              setState(
-                () {
-                  selectedLevelImportance = value!;
-                },
-              );
+              // setState(
+              //   () {
+              //     selectedLevelImportance = value!;
+              //   },
+              // );
             },
             icon: const Icon(
               Icons.expand_more,
@@ -222,7 +220,7 @@ class _AddTodoPage extends State<AddTodoPage> {
     );
   }
 
-  Widget _addBtn() {
+  Widget _addBtn(BuildContext context) {
     return SizedBox(
       height: 50,
       width: 300,
@@ -231,7 +229,15 @@ class _AddTodoPage extends State<AddTodoPage> {
             backgroundColor: const Color(0XFF9C89B8),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15))),
-        onPressed: () {},
+        onPressed: () {
+          controller.create();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ),
+          );
+        },
         child: const Text(
           'Add',
           style: TextStyle(color: Colors.white),

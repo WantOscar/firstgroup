@@ -33,7 +33,7 @@ class HomeScreen extends GetView<TodoController> {
           IconButton(
             onPressed: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const AddTodoPage()));
+                  MaterialPageRoute(builder: (context) => AddTodoPage()));
             },
             icon: const Icon(
               Icons.add,
@@ -173,8 +173,9 @@ class HomeScreen extends GetView<TodoController> {
       width: 250,
       height: 40,
       decoration: BoxDecoration(
-        color: AppColors.blue,
+        color: AppColors.whiteshade,
         borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(color: const Color(0xFF9C89B8), width: 1),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
