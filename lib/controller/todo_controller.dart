@@ -18,7 +18,7 @@ class TodoController extends GetxController {
   }
 
   // 생성 함수
-  void create() {
+  void create(todoModel) {
     final todo = _controller.value.text;
     if (_controller.value.text.isNotEmpty) {
       try {

@@ -9,7 +9,7 @@ import 'package:login_ui/widgets/home_task_text.dart';
 import 'package:login_ui/widgets/home_title.dart';
 
 class HomeScreen extends GetView<TodoController> {
-  HomeScreen({super.key});
+  HomeScreen({Key? key}) : super(key: key);
 
   void signOut() {
     final auth = FirebaseAuth.instance;

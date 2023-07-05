@@ -23,6 +23,7 @@ class TodoModel {
     required this.todo,
     this.time,
     this.isDone,
+    required String name,
   });
 
   factory TodoModel.fromJson(DocumentSnapshot doc) {
@@ -31,11 +32,12 @@ class TodoModel {
       todo: doc['todo'],
       time: doc['time'],
       isDone: doc['isDone'],
+      name: '',
     );
   }
 
   factory TodoModel.toJson(String todo) {
-    return TodoModel(todo: todo);
+    return TodoModel(todo: todo, name: '');
   }
 }
 

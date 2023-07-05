@@ -2,33 +2,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login_ui/controller/todo_controller.dart';
+import 'package:login_ui/data/model/todo_model.dart';
 import 'package:login_ui/screen/home.dart';
 import 'package:login_ui/style/add_todo_page_container.dart';
 import 'package:login_ui/style/add_todo_page_text.dart';
 import 'package:login_ui/style/app_color.dart';
 import 'package:login_ui/style/icon_style.dart';
+import 'package:login_ui/widgets/add_todo_page_color_container.dart';
+import 'package:login_ui/widgets/add_todo_page_date.dart';
+import 'package:login_ui/widgets/add_todo_page_pick_color.dart';
 
 class AddTodoPage extends GetView<TodoController> {
+  String? selectedCategory;
+  String? selectedLevelImportance;
+
   AddTodoPage({Key? key}) : super(key: key);
 
-  // DateTime selectedDate = DateTime.now();
   final ValueNotifier<DateTime> selectedDate =
       ValueNotifier<DateTime>(DateTime.now());
 
   final categoryValue = ['Work', 'Study', 'Exercise'];
-  String? selectedCategory;
 
   final levelimportanceValue = ['중요', '매우중요', '보통'];
-  String? selectedLevelImportance;
-
-  Widget buildColorContainer(Color color) {
-    return Container(
-      height: 40,
-      width: 40,
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(10), color: color),
-    );
-  }
 
   String getFormattedDate(DateTime dateTime) {
     return '${dateTime.year}/${dateTime.month}/${dateTime.day}';
@@ -42,7 +37,7 @@ class AddTodoPage extends GetView<TodoController> {
       lastDate: DateTime(2101),
     );
 
-    if (picked != null && picked != selectedDate.value) {
+    if ((picked != null) && (picked != selectedDate.value)) {
       selectedDate.value = picked;
     }
   }
@@ -70,12 +65,14 @@ class AddTodoPage extends GetView<TodoController> {
             children: [
               _name(),
               const SizedBox(height: 20),
+              // AddTodoPageDate(),
               _date(context),
               const SizedBox(height: 20),
               _category(),
               const SizedBox(height: 20),
               _levelImportance(),
               const SizedBox(height: 20),
+              // AddTodoPagePickColor(),
               _pickColor(),
               const SizedBox(height: 20),
               _addBtn(context),
@@ -152,13 +149,7 @@ class AddTodoPage extends GetView<TodoController> {
             items: categoryValue
                 .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                 .toList(),
-            onChanged: (value) {
-              // setState(
-              //   () {
-              //     selectedCategory = value!;
-              //   },
-              // );
-            },
+            onChanged: (value) {},
             icon: const Icon(
               Icons.expand_more,
               color: Color(0xFF9C89B8),
@@ -183,13 +174,7 @@ class AddTodoPage extends GetView<TodoController> {
             items: levelimportanceValue
                 .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                 .toList(),
-            onChanged: (value) {
-              // setState(
-              //   () {
-              //     selectedLevelImportance = value!;
-              //   },
-              // );
-            },
+            onChanged: (value) {},
             icon: const Icon(
               Icons.expand_more,
               color: Color(0xFF9C89B8),
@@ -208,13 +193,13 @@ class AddTodoPage extends GetView<TodoController> {
         const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            buildColorContainer(AppColors.lightGreen),
-            buildColorContainer(AppColors.lightRed),
-            buildColorContainer(AppColors.lightOrange),
-            buildColorContainer(AppColors.lightYellow),
-            buildColorContainer(AppColors.lightBlue),
-            buildColorContainer(AppColors.lightPink),
+          children: const [
+            AddTodoPageColorContainer(color: AppColors.lightGreen),
+            AddTodoPageColorContainer(color: AppColors.lightRed),
+            AddTodoPageColorContainer(color: AppColors.lightOrange),
+            AddTodoPageColorContainer(color: AppColors.lightYellow),
+            AddTodoPageColorContainer(color: AppColors.lightBlue),
+            AddTodoPageColorContainer(color: AppColors.lightPink),
           ],
         ),
       ],
@@ -231,7 +216,7 @@ class AddTodoPage extends GetView<TodoController> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15))),
         onPressed: () {
-          controller.create();
+          controller.create(TodoModel);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

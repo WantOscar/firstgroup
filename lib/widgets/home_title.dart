@@ -8,7 +8,7 @@ class HomeTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 250,
-      height: 40,
+      height: 45,
       decoration: BoxDecoration(
         color: AppColors.whiteshade,
         borderRadius: BorderRadius.circular(8.0),
@@ -21,7 +21,11 @@ class HomeTitle extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: Text(
               'Category',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+              // textAlign: TextAlign.end,
             ),
           ),
           IconButton(
