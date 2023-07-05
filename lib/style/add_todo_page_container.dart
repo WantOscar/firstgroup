@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 
 class AddTodoPageContainer extends StatelessWidget {
   final Widget child;
-  const AddTodoPageContainer({super.key, required this.child});
+  final Color color;
+  const AddTodoPageContainer(
+      {super.key, required this.child, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 300,
-      height: 40,
+      height: 45,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: const Color(0xFF9C89B8),
+          color: color,
         ),
       ),
       child: child,

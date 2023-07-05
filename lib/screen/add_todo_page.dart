@@ -6,6 +6,7 @@ import 'package:login_ui/screen/home.dart';
 import 'package:login_ui/style/add_todo_page_container.dart';
 import 'package:login_ui/style/add_todo_page_text.dart';
 import 'package:login_ui/style/app_color.dart';
+import 'package:login_ui/style/icon_style.dart';
 
 class AddTodoPage extends GetView<TodoController> {
   AddTodoPage({Key? key}) : super(key: key);
@@ -55,11 +56,7 @@ class AddTodoPage extends GetView<TodoController> {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => HomeScreen()));
           },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Color(0xFF9C89B8),
-            size: 40,
-          ),
+          icon: IconStyle.iconArrowBack,
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -98,6 +95,7 @@ class AddTodoPage extends GetView<TodoController> {
         ),
         const SizedBox(height: 5),
         AddTodoPageContainer(
+          color: const Color(0xFF9C89B8),
           child: SizedBox(
             width: 300,
             child: TextField(
@@ -116,6 +114,7 @@ class AddTodoPage extends GetView<TodoController> {
         const AddTodoPageText(text: 'Date'),
         const SizedBox(height: 5),
         AddTodoPageContainer(
+          color: const Color(0xFF9C89B8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -146,6 +145,7 @@ class AddTodoPage extends GetView<TodoController> {
         const AddTodoPageText(text: 'Category'),
         const SizedBox(height: 5),
         AddTodoPageContainer(
+          color: const Color(0xFF9C89B8),
           child: DropdownButton(
             value: selectedCategory,
             isExpanded: true,
@@ -176,6 +176,7 @@ class AddTodoPage extends GetView<TodoController> {
         const AddTodoPageText(text: 'Level Importance'),
         const SizedBox(height: 5),
         AddTodoPageContainer(
+          color: const Color(0xFF9C89B8),
           child: DropdownButton(
             value: selectedLevelImportance,
             isExpanded: true,

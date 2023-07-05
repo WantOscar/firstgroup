@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:login_ui/controller/todo_controller.dart';
 import 'package:login_ui/screen/add_todo_page.dart';
 import 'package:login_ui/style/app_color.dart';
+import 'package:login_ui/style/icon_style.dart';
 import 'package:login_ui/widgets/home_task_text.dart';
+import 'package:login_ui/widgets/home_title.dart';
 
 class HomeScreen extends GetView<TodoController> {
   HomeScreen({super.key});
@@ -20,14 +22,10 @@ class HomeScreen extends GetView<TodoController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(
-          Icons.sort,
-          size: 40,
-          color: Color(0xFF9C89B8),
-        ),
+        leading: IconStyle.iconSort,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: _title(),
+        title: const HomeTitle(),
         centerTitle: true,
         actions: [
           IconButton(
@@ -35,11 +33,7 @@ class HomeScreen extends GetView<TodoController> {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => AddTodoPage()));
             },
-            icon: const Icon(
-              Icons.add,
-              color: Color(0xFF9C89B8),
-              size: 40,
-            ),
+            icon: IconStyle.iconAdd,
           ),
         ],
       ),
@@ -47,7 +41,7 @@ class HomeScreen extends GetView<TodoController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const HomeTaskText(),
-          _create(),
+          // _create(),
           _todoList(),
           _signOut(),
         ],
@@ -71,11 +65,7 @@ class HomeScreen extends GetView<TodoController> {
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                             onTap: () => controller.deleteTodo(todoModel.id!),
-                            child: const Icon(
-                              Icons.check_circle,
-                              color: AppColors.lightBlue,
-                              size: 40,
-                            ),
+                            child: IconStyle.iconCheckCircle,
                           ),
                         )
                       : Padding(
@@ -84,16 +74,10 @@ class HomeScreen extends GetView<TodoController> {
                             onTap: () {
                               controller.updateTodo(todoModel.id!);
                             },
-                            child: const Icon(
-                              Icons.circle_outlined,
-                              color: AppColors.lightBlue,
-                              size: 40,
-                            ),
+                            child: IconStyle.iconCircleOutlined,
                           ),
                         ),
-                  const SizedBox(
-                    width: 20,
-                  ),
+                  const SizedBox(width: 20),
                   Flexible(
                     child: Container(
                       width: 300,
@@ -125,6 +109,7 @@ class HomeScreen extends GetView<TodoController> {
                         ],
                       ),
                     ),
+                    // child: AddTodoPageContainer(),
                   ),
                 ],
               ),
@@ -135,23 +120,23 @@ class HomeScreen extends GetView<TodoController> {
     );
   }
 
-  Widget _create() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        SizedBox(
-          width: 250,
-          child: TextField(
-            controller: controller.createCon,
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () => controller.create(),
-          child: const Icon(Icons.send),
-        ),
-      ],
-    );
-  }
+  // Widget _create() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //     children: [
+  //       SizedBox(
+  //         width: 250,
+  //         child: TextField(
+  //           controller: controller.createCon,
+  //         ),
+  //       ),
+  //       ElevatedButton(
+  //         onPressed: () => controller.create(),
+  //         child: const Icon(Icons.send),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _signOut() {
     return Row(
@@ -165,34 +150,6 @@ class HomeScreen extends GetView<TodoController> {
           iconSize: 40,
         ),
       ],
-    );
-  }
-
-  Widget _title() {
-    return Container(
-      width: 250,
-      height: 40,
-      decoration: BoxDecoration(
-        color: AppColors.whiteshade,
-        borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(color: const Color(0xFF9C89B8), width: 1),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Category',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.expand_more),
-          ),
-        ],
-      ),
     );
   }
 }
