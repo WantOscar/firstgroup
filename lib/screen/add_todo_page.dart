@@ -9,21 +9,18 @@ import 'package:login_ui/style/add_todo_page_text.dart';
 import 'package:login_ui/style/app_color.dart';
 import 'package:login_ui/style/icon_style.dart';
 import 'package:login_ui/widgets/add_todo_page_color_container.dart';
-import 'package:login_ui/widgets/add_todo_page_date.dart';
-import 'package:login_ui/widgets/add_todo_page_pick_color.dart';
 
 class AddTodoPage extends GetView<TodoController> {
-  String? selectedCategory;
-  String? selectedLevelImportance;
-
   AddTodoPage({Key? key}) : super(key: key);
 
   final ValueNotifier<DateTime> selectedDate =
       ValueNotifier<DateTime>(DateTime.now());
 
   final categoryValue = ['Work', 'Study', 'Exercise'];
+  String? selectedCategory;
 
   final levelimportanceValue = ['중요', '매우중요', '보통'];
+  String? selectedLevelImportance;
 
   String getFormattedDate(DateTime dateTime) {
     return '${dateTime.year}/${dateTime.month}/${dateTime.day}';
@@ -65,14 +62,12 @@ class AddTodoPage extends GetView<TodoController> {
             children: [
               _name(),
               const SizedBox(height: 20),
-              // AddTodoPageDate(),
               _date(context),
               const SizedBox(height: 20),
               _category(),
               const SizedBox(height: 20),
               _levelImportance(),
               const SizedBox(height: 20),
-              // AddTodoPagePickColor(),
               _pickColor(),
               const SizedBox(height: 20),
               _addBtn(context),

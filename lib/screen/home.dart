@@ -41,7 +41,6 @@ class HomeScreen extends GetView<TodoController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const HomeTaskText(),
-          // _create(),
           _todoList(),
           _signOut(),
         ],
@@ -109,7 +108,6 @@ class HomeScreen extends GetView<TodoController> {
                         ],
                       ),
                     ),
-                    // child: AddTodoPageContainer(),
                   ),
                 ],
               ),
@@ -119,24 +117,6 @@ class HomeScreen extends GetView<TodoController> {
       ),
     );
   }
-
-  // Widget _create() {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //     children: [
-  //       SizedBox(
-  //         width: 250,
-  //         child: TextField(
-  //           controller: controller.createCon,
-  //         ),
-  //       ),
-  //       ElevatedButton(
-  //         onPressed: () => controller.create(),
-  //         child: const Icon(Icons.send),
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget _signOut() {
     return Row(
